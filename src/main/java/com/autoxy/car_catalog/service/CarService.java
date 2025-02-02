@@ -5,6 +5,8 @@ import com.autoxy.car_catalog.repository.CarRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class CarService {
 
@@ -17,6 +19,10 @@ public class CarService {
 
     public CarEntity readCarById(long id) {
         return carRepository.getReferenceById(id);
+    }
+
+    public List<CarEntity> readAllCars() {
+        return carRepository.findAll();
     }
 
     //TODO update

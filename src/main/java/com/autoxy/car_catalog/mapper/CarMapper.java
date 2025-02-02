@@ -7,6 +7,9 @@ import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @Component
 public class CarMapper {
 
@@ -21,6 +24,12 @@ public class CarMapper {
 
     public CarResponseDto entityToResponse(CarEntity entity) {
          return modelMapper.map(entity, CarResponseDto.class);
+    }
+
+    public List<CarResponseDto> entitiesToResponses(List<CarEntity> entities) {
+        List<CarResponseDto> responses = new ArrayList<>();
+        entities.forEach(entity -> responses.add(modelMapper.map(entity, CarResponseDto.class)));
+        return responses;
     }
 
 }

@@ -11,6 +11,8 @@ import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RestController
 @RequestMapping(path = "/cars",
         consumes = MediaType.APPLICATION_JSON_VALUE,
@@ -40,6 +42,15 @@ public class CarController {
         CarEntity entity = carService.readCarById(Long.parseLong(id));
         CarResponseDto response = carMapper.entityToResponse(entity);
         return new ResponseEntity<>(response, HttpStatus.OK);
+    }
+
+    @GetMapping
+    @ResponseStatus(HttpStatus.OK)
+    @ResponseBody
+    public ResponseEntity<List<CarResponseDto>> readAllCars() {
+        List<CarEntity> entities = carService.readAllCars();
+        List<CarResponseDto> responses = carMapper.entitiesToResponses(entities);
+        return new ResponseEntity<>(responses, HttpStatus.OK);
     }
 
     //TODO put
