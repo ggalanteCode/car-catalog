@@ -15,7 +15,9 @@ public class CarService {
         return carRepository.save(entity);
     }
 
-    //TODO read
+    public CarEntity readCarById(long id) {
+        return carRepository.getReferenceById(id);
+    }
 
     //TODO update
 

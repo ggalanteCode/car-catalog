@@ -33,7 +33,14 @@ public class CarController {
         return new ResponseEntity<>(response, HttpStatus.CREATED);
     }
 
-    //TODO get
+    @GetMapping("/{id}")
+    @ResponseStatus(HttpStatus.OK)
+    @ResponseBody
+    public ResponseEntity<CarResponseDto> readCarById(@PathVariable String id) {
+        CarEntity entity = carService.readCarById(Long.parseLong(id));
+        CarResponseDto response = carMapper.entityToResponse(entity);
+        return new ResponseEntity<>(response, HttpStatus.OK);
+    }
 
     //TODO put
 
