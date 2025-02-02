@@ -1,36 +1,16 @@
-package com.autoxy.car_catalog.entity;
+package com.autoxy.car_catalog.dto;
 
-import jakarta.persistence.*;
+public class CarRequestDto {
 
-@Entity
-public class CarEntity {
-
-    @Id
-    @GeneratedValue(strategy= GenerationType.AUTO)
-    private Long id;
-
-    @Column
     private String brand;
 
-    @Column
     private String model;
 
-    @Column
     private String yearOfProduction;
 
-    @Column
     private Double price;
 
-    @Column
     private String status;
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
 
     public String getBrand() {
         return brand;
