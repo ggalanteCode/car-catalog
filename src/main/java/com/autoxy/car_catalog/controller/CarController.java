@@ -11,7 +11,9 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
-@RequestMapping("/cars")
+@RequestMapping(path = "/cars",
+        consumes = MediaType.APPLICATION_JSON_VALUE,
+        produces = MediaType.APPLICATION_JSON_VALUE)
 public class CarController {
 
     @Autowired
@@ -20,8 +22,7 @@ public class CarController {
     @Autowired
     private ModelMapper carMapper;
 
-    @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE,
-            produces = MediaType.APPLICATION_JSON_VALUE)
+    @PostMapping
     @ResponseBody
     public ResponseEntity<CarResponseDto> createCar(@RequestBody CarRequestDto request) {
         CarEntity entity = carMapper.typeMap(CarRequestDto.class, CarEntity.class)
