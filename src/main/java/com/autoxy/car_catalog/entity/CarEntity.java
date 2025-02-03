@@ -9,19 +9,19 @@ public class CarEntity {
     @GeneratedValue(strategy= GenerationType.AUTO)
     private Long id;
 
-    @Column
+    @Column(nullable = false)
     private String brand;
 
-    @Column
+    @Column(nullable = false)
     private String model;
 
-    @Column
+    @Column(nullable = false)
     private String yearOfProduction;
 
-    @Column
+    @Column(nullable = false)
     private Double price;
 
-    @Column
+    @Column(nullable = false)
     private String status;
 
     public Long getId() {
