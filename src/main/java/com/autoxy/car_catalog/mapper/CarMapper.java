@@ -32,4 +32,8 @@ public class CarMapper {
         return responses;
     }
 
+    public void updateEntity(CarEntity entityWithNewValues, CarEntity entityToBeUpdated) {
+        modelMapper.map(entityWithNewValues, entityToBeUpdated);
+    }
+
 }

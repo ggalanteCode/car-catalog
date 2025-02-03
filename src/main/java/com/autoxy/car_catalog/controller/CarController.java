@@ -53,7 +53,16 @@ public class CarController {
         return new ResponseEntity<>(responses, HttpStatus.OK);
     }
 
-    //TODO put
+    @PutMapping("/{id}")
+    @ResponseStatus(HttpStatus.OK)
+    @ResponseBody
+    public ResponseEntity<CarResponseDto> updateCar(@PathVariable String id,
+                                                    @RequestBody CarRequestDto request) {
+        CarEntity entity = carMapper.requestToEntity(request);
+        entity = carService.updateCar(Long.parseLong(id), entity);
+        CarResponseDto response = carMapper.entityToResponse(entity);
+        return new ResponseEntity<>(response, HttpStatus.OK);
+    }
 
     //TODO delete
 
