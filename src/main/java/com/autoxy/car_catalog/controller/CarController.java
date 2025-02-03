@@ -64,6 +64,12 @@ public class CarController {
         return new ResponseEntity<>(response, HttpStatus.OK);
     }
 
-    //TODO delete
+    @DeleteMapping("/{id}")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    @ResponseBody
+    public ResponseEntity<String> deleteCarById(@PathVariable String id) {
+        carService.deleteCarById(Long.parseLong(id));
+        return ResponseEntity.noContent().build();
+    }
 
 }

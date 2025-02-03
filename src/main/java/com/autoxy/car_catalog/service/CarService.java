@@ -47,6 +47,8 @@ public class CarService {
         return entityToBeUpdated;
     }
 
-    //TODO delete
+    public void deleteCarById(long id) {
+        carRepository.deleteById(id);
+    }
 
 }
