@@ -1,7 +1,9 @@
 package com.autoxy.car_catalog.service;
 
 import com.autoxy.car_catalog.entity.CarEntity;
+import com.autoxy.car_catalog.exceptions.CarNotFoundException;
 import com.autoxy.car_catalog.exceptions.CarStatusValueException;
+import com.autoxy.car_catalog.exceptions.NoCarExistsException;
 import com.autoxy.car_catalog.mapper.CarMapper;
 import com.autoxy.car_catalog.repository.CarRepository;
 import com.autoxy.car_catalog.validator.CarValidator;
@@ -32,11 +34,16 @@ public class CarService {
     }
 
     public CarEntity readCarById(long id) {
-        return carRepository.getReferenceById(id);
+        return carRepository.findById(id)
+                .orElseThrow(() -> new CarNotFoundException("Car with id: " + id + " doesn't exist!"));
     }
 
     public List<CarEntity> readAllCars() {
-        return carRepository.findAll();
+        List<CarEntity> entities = carRepository.findAll();
+        if (entities.isEmpty()) {
+            throw new NoCarExistsException("No Car exists at the moment!");
+        }
+        return entities;
     }
 
     public CarEntity updateCar(long id, CarEntity entity) {
