@@ -26,10 +26,7 @@ public class CarService {
 
     public CarEntity createNewCar(CarEntity entity)
             throws PropertyValueException, DateTimeParseException, CarStatusValueException, NullPointerException {
-        if (!CarValidator.isCarStatusValid(entity)) {
-            throw new CarStatusValueException("Car status can be only \"available\" or \"sold\".");
-        }
-        CarValidator.validateCarYear(entity);
+        validateNewCar(entity);
         return carRepository.save(entity);
     }
 
@@ -65,6 +62,14 @@ public class CarService {
 
     public void deleteCarById(long id) {
         carRepository.deleteById(id);
+    }
+
+    private void validateNewCar(CarEntity entity)
+            throws DateTimeParseException, CarStatusValueException, NullPointerException {
+        if (!CarValidator.isCarStatusValid(entity)) {
+            throw new CarStatusValueException("Car status can be only \"available\" or \"sold\".");
+        }
+        CarValidator.validateCarYear(entity);
     }
 
 }
