@@ -33,12 +33,12 @@ public class CarService {
         return carRepository.save(entity);
     }
 
-    public CarEntity readCarById(long id) {
+    public CarEntity readCarById(long id) throws CarNotFoundException {
         return carRepository.findById(id)
                 .orElseThrow(() -> new CarNotFoundException("Car with id: " + id + " doesn't exist!"));
     }
 
-    public List<CarEntity> readAllCars() {
+    public List<CarEntity> readAllCars() throws NoCarExistsException {
         List<CarEntity> entities = carRepository.findAll();
         if (entities.isEmpty()) {
             throw new NoCarExistsException("No Car exists at the moment!");
