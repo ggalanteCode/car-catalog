@@ -43,15 +43,18 @@ public class CarService {
         return entities;
     }
 
-    public CarEntity updateCar(long id, CarEntity entity) {
+    public CarEntity updateCar(long id, CarEntity entity)
+            throws PropertyValueException, DateTimeParseException, CarStatusValueException, NullPointerException {
 
         Optional<CarEntity> oldEntity = carRepository.findById(id);
         if (oldEntity.isEmpty()) {
-            return carRepository.save(entity);
+            return createNewCar(entity);
         }
 
         CarEntity entityToBeUpdated = oldEntity.get();
         entity.setId(id);
+
+        validateNewCar(entity);
 
         carMapper.updateEntity(entity, entityToBeUpdated);
 
