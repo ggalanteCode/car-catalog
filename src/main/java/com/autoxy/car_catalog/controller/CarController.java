@@ -58,7 +58,7 @@ public class CarController {
     @ResponseStatus(HttpStatus.OK)
     @ResponseBody
     public ResponseEntity<CarResponseDto> updateCar(@PathVariable String id,
-                                                    @RequestBody CarRequestDto request) {
+                                                    @RequestBody CarRequestDto request) throws HttpMessageNotReadableException {
         CarEntity entity = carMapper.requestToEntity(request);
         entity = carService.updateCar(Long.parseLong(id), entity);
         CarResponseDto response = carMapper.entityToResponse(entity);
