@@ -71,4 +71,16 @@ public class CarEntity {
     public void setStatus(String status) {
         this.status = status;
     }
+
+    @Override
+    public String toString() {
+        return "CarEntity{" +
+                "id=" + id +
+                ", brand='" + brand + '\'' +
+                ", model='" + model + '\'' +
+                ", yearOfProduction='" + yearOfProduction + '\'' +
+                ", price=" + price +
+                ", status='" + status + '\'' +
+                '}';
+    }
 }
