@@ -63,7 +63,11 @@ public class CarService {
         return entityToBeUpdated;
     }
 
-    public void deleteCarById(long id) {
+    public void deleteCarById(long id) throws CarNotFoundException {
+        boolean thisCarByIdExists = carRepository.existsById(id);
+        if (!thisCarByIdExists) {
+            throw new CarNotFoundException("Car with id: " + id + " doesn't exist!");
+        }
         carRepository.deleteById(id);
     }
 
