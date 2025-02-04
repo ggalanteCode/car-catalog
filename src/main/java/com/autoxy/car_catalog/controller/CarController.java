@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.http.converter.HttpMessageNotReadableException;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -28,7 +29,7 @@ public class CarController {
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
     @ResponseBody
-    public ResponseEntity<CarResponseDto> createCar(@RequestBody CarRequestDto request) {
+    public ResponseEntity<CarResponseDto> createCar(@RequestBody CarRequestDto request) throws HttpMessageNotReadableException {
         CarEntity entity = carMapper.requestToEntity(request);
         entity = carService.createNewCar(entity);
         CarResponseDto response = carMapper.entityToResponse(entity);
