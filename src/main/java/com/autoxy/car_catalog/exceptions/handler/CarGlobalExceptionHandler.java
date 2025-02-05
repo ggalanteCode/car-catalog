@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.ResponseStatus;
+import org.springframework.web.servlet.resource.NoResourceFoundException;
 
 import java.time.format.DateTimeParseException;
 
@@ -71,6 +72,14 @@ public class CarGlobalExceptionHandler {
     @ResponseBody
     public ResponseEntity<CarErrorResponseDto> handleNoCarExistsException(NoCarExistsException ncee) {
         CarErrorResponseDto errorResponse = new CarErrorResponseDto("No Car exists at the moment!");
+        return new ResponseEntity<>(errorResponse, HttpStatus.NOT_FOUND);
+    }
+
+    @ExceptionHandler(value = NoResourceFoundException.class)
+    @ResponseStatus(HttpStatus.NOT_FOUND)
+    @ResponseBody
+    public ResponseEntity<CarErrorResponseDto> handleNoResourceFoundException(NoResourceFoundException nrfe) {
+        CarErrorResponseDto errorResponse = new CarErrorResponseDto("Please specify a not empty parameter in the URL!");
         return new ResponseEntity<>(errorResponse, HttpStatus.NOT_FOUND);
     }
 
