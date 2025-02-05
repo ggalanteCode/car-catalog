@@ -83,4 +83,12 @@ public class CarGlobalExceptionHandler {
         return new ResponseEntity<>(errorResponse, HttpStatus.NOT_FOUND);
     }
 
+    @ExceptionHandler(value = NumberFormatException.class)
+    @ResponseStatus(HttpStatus.BAD_REQUEST)
+    @ResponseBody
+    public ResponseEntity<CarErrorResponseDto> handleNumberFormatException(NumberFormatException nfe) {
+        CarErrorResponseDto errorResponse = new CarErrorResponseDto("Please specify a valid number in your request!");
+        return new ResponseEntity<>(errorResponse, HttpStatus.BAD_REQUEST);
+    }
+
 }
