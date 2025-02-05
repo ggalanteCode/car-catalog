@@ -25,17 +25,20 @@ public class CarServiceImpl implements CarService {
     @Autowired
     private CarMapper carMapper;
 
+    @Override
     public CarEntity createNewCar(CarEntity entity)
             throws PropertyValueException, DateTimeParseException, CarStatusValueException, NullPointerException {
         validateNewCar(entity);
         return carRepository.save(entity);
     }
 
+    @Override
     public CarEntity readCarById(long id) throws CarNotFoundException {
         return carRepository.findById(id)
                 .orElseThrow(() -> new CarNotFoundException("Car with id: " + id + " doesn't exist!"));
     }
 
+    @Override
     public List<CarEntity> readAllCars() throws NoCarExistsException {
         List<CarEntity> entities = carRepository.findAll();
         if (entities.isEmpty()) {
@@ -44,6 +47,7 @@ public class CarServiceImpl implements CarService {
         return entities;
     }
 
+    @Override
     public CarEntity updateCar(long id, CarEntity entity)
             throws PropertyValueException, DateTimeParseException, CarStatusValueException, NullPointerException {
 
@@ -64,6 +68,7 @@ public class CarServiceImpl implements CarService {
         return entityToBeUpdated;
     }
 
+    @Override
     public void deleteCarById(long id) throws CarNotFoundException {
         boolean thisCarByIdExists = carRepository.existsById(id);
         if (!thisCarByIdExists) {
