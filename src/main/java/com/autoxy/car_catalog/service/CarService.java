@@ -13,5 +13,6 @@ public interface CarService {
     void deleteCarById(long id);
     List<CarEntity> readCarsByBrand(String brand);
     List<CarEntity> readCarsByPriceRange(double minPrice, double maxPrice);
+    List<CarEntity> readCarsByStatus(String status);
 
 }

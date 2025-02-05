@@ -13,4 +13,6 @@ public interface CarRepository extends JpaRepository<CarEntity, Long> {
 
     public List<CarEntity> findByPriceBetween(double minPrice, double maxPrice);
 
+    public List<CarEntity> findByStatus(String status);
+
 }

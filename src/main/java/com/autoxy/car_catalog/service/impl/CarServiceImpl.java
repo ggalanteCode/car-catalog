@@ -91,6 +91,15 @@ public class CarServiceImpl implements CarService {
         return entities;
     }
 
+    @Override
+    public List<CarEntity> readCarsByStatus(String status) throws NoCarExistsException {
+        List<CarEntity> entities = carRepository.findByStatus(status);
+        if (entities.isEmpty()) {
+            throw new NoCarExistsException("No Car with status: " + status + " exists at the moment!");
+        }
+        return entities;
+    }
+
     private void validateNewCar(CarEntity entity)
             throws DateTimeParseException, CarStatusValueException, NullPointerException {
         if (!CarValidator.isCarStatusValid(entity)) {
