@@ -6,7 +6,23 @@ catalogue.
 ## How to start and test the application
 
 Before starting the application, create an ```application.properties``` file in the ```src/main/resources``` folder, and 
-specify the properties required for H2 database. Ensure to exclude this properties file by specifying it in the 
+specify the properties required for H2 database:
+
+- ```spring.datasource.url```
+- ```spring.datasource.driverClassName```
+- ```spring.datasource.username```
+- ```spring.datasource.password```
+- ```spring.jpa.database-platform```
+
+FOR THE H2 DATABASE USED FOR TESTING:
+
+- ```spring.datasource.test.url```
+- ```spring.datasource.test.driverClassName```
+- ```spring.datasource.test.username```
+- ```spring.datasource.test.password```
+- ```spring.jpa.test.hibernate.ddl-auto```
+
+Ensure to exclude this properties file by specifying it in the 
 ```.gitignore``` file.
 
 ### Testing the endpoints directly using Postman
@@ -25,6 +41,8 @@ The values in the request bodies and the path variables/request parameters in th
 
 If the values in the request body or the path variables/request parameters in the URL are absent or sintactically 
 incorrect, the API will respond with an appropriate error message.
+
+Below you will find the cURLs for making the API calls via Postman, you can copy & paste them.
 
 #### POST /cars
 ```
@@ -67,6 +85,24 @@ curl --location --request PUT 'http://localhost:8080/cars/1' \
 #### DELETE /cars/{id}
 ```
 curl --location --request DELETE 'http://localhost:8080/cars/1' \
+--header 'Content-Type: application/json'
+```
+
+#### GET /cars/brand/{brand}
+```
+curl --location --request GET 'http://localhost:8080/cars/brand/Toyota' \
+--header 'Content-Type: application/json'
+```
+
+#### GET /cars/byPriceRange?fromPrice=value1&toPrice=value2
+```
+curl --location --request GET 'http://localhost:8080/cars/byPriceRange?fromPrice=1000&toPrice=10000' \
+--header 'Content-Type: application/json'
+```
+
+#### GET /cars/status/{status}
+```
+curl --location --request GET 'http://localhost:8080/cars/status/available' \
 --header 'Content-Type: application/json'
 ```
 
@@ -121,12 +157,45 @@ the API will respond with an error message.
 }
 ```
 
-- In the ```GET /cars```, if there are no Cars, the API will respond with an error message.
+- In the ```GET /cars```, ```GET /cars/brand/{brand}```, ```GET /cars/byPriceRange?fromPrice=value1&toPrice=value2```, 
+  and ```GET /cars/status/{status}```, if there are no Cars, the API will respond with an error message.
 ```
 {
   "message":"No Car exists at the moment!"
 }
 ```
 
+- In the ```GET /cars/byPriceRange?fromPrice=value1&toPrice=value2```, if the maximum price is less than the minimum 
+  price, the API will respond with an error message.
+```
+{
+  "message":"The maximum price cannot be less than the minimum price!"
+}
+```
+and if one or both the specified prices are omitted or invalid, the API will respond with an error message.
+```
+{
+  "message":"Please specify a valid number in your request!"
+}
+```
+
+- In every API call that requires a parameter in the URL, if the parameter is omitted, the API will respond with an 
+  error message.
+```
+{
+  "message":"Please specify a not empty parameter in the URL!"
+}
+```
+
 - any other field arbitrarily specified in the request body that is different from those specified above (```brand```, 
   ```model```, ```yearOfProduction```, ```price```, ```status```) will be ignored.
+
+### Execute the Unit Tests
+
+- There are implemented some unit tests for the Repository layer (CarRepository), in the 
+  ```src/test/java/com/autoxy/car_catalog/CarRepositoryUnitTests.java```. You can execute these unit tests by clicking 
+  on the play buttons (in IntelliJ IDEA), the play button on top allows you to execute all unit tests (not disabled), 
+  the other play buttons allow you to execute a single unit test.
+
+- Some test methods are disabled by default with the ```@Disabled``` annotation, so remove this annotation to execute 
+  these tests.
