@@ -2,6 +2,7 @@ package com.autoxy.car_catalog.exceptions.handler;
 
 import com.autoxy.car_catalog.dto.CarErrorResponseDto;
 import com.autoxy.car_catalog.exceptions.CarNotFoundException;
+import com.autoxy.car_catalog.exceptions.CarPriceRangeException;
 import com.autoxy.car_catalog.exceptions.CarStatusValueException;
 import com.autoxy.car_catalog.exceptions.NoCarExistsException;
 import org.hibernate.PropertyValueException;
@@ -88,6 +89,14 @@ public class CarGlobalExceptionHandler {
     @ResponseBody
     public ResponseEntity<CarErrorResponseDto> handleNumberFormatException(NumberFormatException nfe) {
         CarErrorResponseDto errorResponse = new CarErrorResponseDto("Please specify a valid number in your request!");
+        return new ResponseEntity<>(errorResponse, HttpStatus.BAD_REQUEST);
+    }
+
+    @ExceptionHandler(value = CarPriceRangeException.class)
+    @ResponseStatus(HttpStatus.BAD_REQUEST)
+    @ResponseBody
+    public ResponseEntity<CarErrorResponseDto> handleCarPriceRangeException(CarPriceRangeException cpre) {
+        CarErrorResponseDto errorResponse = new CarErrorResponseDto("The maximum price cannot be less than the minimum price!");
         return new ResponseEntity<>(errorResponse, HttpStatus.BAD_REQUEST);
     }
 

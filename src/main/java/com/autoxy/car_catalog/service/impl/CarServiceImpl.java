@@ -2,6 +2,7 @@ package com.autoxy.car_catalog.service.impl;
 
 import com.autoxy.car_catalog.entity.CarEntity;
 import com.autoxy.car_catalog.exceptions.CarNotFoundException;
+import com.autoxy.car_catalog.exceptions.CarPriceRangeException;
 import com.autoxy.car_catalog.exceptions.CarStatusValueException;
 import com.autoxy.car_catalog.exceptions.NoCarExistsException;
 import com.autoxy.car_catalog.mapper.CarMapper;
@@ -87,7 +88,11 @@ public class CarServiceImpl implements CarService {
     }
 
     @Override
-    public List<CarEntity> readCarsByPriceRange(double minPrice, double maxPrice) throws NoCarExistsException {
+    public List<CarEntity> readCarsByPriceRange(double minPrice, double maxPrice)
+            throws NoCarExistsException, CarPriceRangeException {
+        if (maxPrice < minPrice) {
+            throw new CarPriceRangeException("The maximum price cannot be less than the minimum price!");
+        }
         List<CarEntity> entities = carRepository.findByPriceBetween(minPrice, maxPrice);
         if (entities.isEmpty()) {
             throw new NoCarExistsException("No Car with price between " + minPrice + " and " + maxPrice +
