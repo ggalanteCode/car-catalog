@@ -113,8 +113,8 @@ the API will respond with an error message.
 }
 ```
 
-- In the ```GET /cars/{id}```, if you specify the id of a Car that does not exist, the API will respond with an error 
-  message.
+- In the ```GET /cars/{id}``` and in the ```DELETE /cars/{id}```, if you specify the id of a Car that does not exist, 
+  the API will respond with an error message.
 ```
 {
   "message":"the Car with the specified id doesn't exist!"
