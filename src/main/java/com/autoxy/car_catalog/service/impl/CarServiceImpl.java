@@ -81,6 +81,16 @@ public class CarServiceImpl implements CarService {
         return entities;
     }
 
+    @Override
+    public List<CarEntity> readCarsByPriceRange(double minPrice, double maxPrice) throws NoCarExistsException {
+        List<CarEntity> entities = carRepository.findByPriceBetween(minPrice, maxPrice);
+        if (entities.isEmpty()) {
+            throw new NoCarExistsException("No Car with price between " + minPrice + " and " + maxPrice +
+                    " exists at the moment!");
+        }
+        return entities;
+    }
+
     private void validateNewCar(CarEntity entity)
             throws DateTimeParseException, CarStatusValueException, NullPointerException {
         if (!CarValidator.isCarStatusValid(entity)) {

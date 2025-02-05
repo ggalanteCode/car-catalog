@@ -12,5 +12,6 @@ public interface CarService {
     CarEntity updateCar(long id, CarEntity entity);
     void deleteCarById(long id);
     List<CarEntity> readCarsByBrand(String brand);
+    List<CarEntity> readCarsByPriceRange(double minPrice, double maxPrice);
 
 }

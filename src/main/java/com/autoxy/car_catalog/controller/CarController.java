@@ -82,4 +82,16 @@ public class CarController {
         return new ResponseEntity<>(responses, HttpStatus.OK);
     }
 
+    @GetMapping("/byPriceRange")
+    @ResponseStatus(HttpStatus.OK)
+    @ResponseBody
+    public ResponseEntity<List<CarResponseDto>> readCarsByPriceRange(@RequestParam String fromPrice,
+                                                                @RequestParam String toPrice) {
+        List<CarEntity> entities = carService.readCarsByPriceRange(Double.parseDouble(fromPrice),
+                Double.parseDouble(toPrice));
+        List<CarResponseDto> responses = carMapper.entitiesToResponses(entities);
+        return new ResponseEntity<>(responses, HttpStatus.OK);
+    }
+
+
 }

@@ -11,4 +11,6 @@ public interface CarRepository extends JpaRepository<CarEntity, Long> {
 
     public List<CarEntity> findByBrand(String brand);
 
+    public List<CarEntity> findByPriceBetween(double minPrice, double maxPrice);
+
 }
