@@ -73,4 +73,13 @@ public class CarController {
         return ResponseEntity.noContent().build();
     }
 
+    @GetMapping("/brand/{brand}")
+    @ResponseStatus(HttpStatus.OK)
+    @ResponseBody
+    public ResponseEntity<List<CarResponseDto>> readCarsByBrand(@PathVariable String brand) {
+        List<CarEntity> entities = carService.readCarsByBrand(brand);
+        List<CarResponseDto> responses = carMapper.entitiesToResponses(entities);
+        return new ResponseEntity<>(responses, HttpStatus.OK);
+    }
+
 }

@@ -72,6 +72,15 @@ public class CarServiceImpl implements CarService {
         carRepository.deleteById(id);
     }
 
+    @Override
+    public List<CarEntity> readCarsByBrand(String brand) throws NoCarExistsException {
+        List<CarEntity> entities = carRepository.findByBrand(brand);
+        if (entities.isEmpty()) {
+            throw new NoCarExistsException("No Car with brand: " + brand + " exists at the moment!");
+        }
+        return entities;
+    }
+
     private void validateNewCar(CarEntity entity)
             throws DateTimeParseException, CarStatusValueException, NullPointerException {
         if (!CarValidator.isCarStatusValid(entity)) {
