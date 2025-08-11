@@ -9,10 +9,10 @@ import java.util.List;
 @Repository
 public interface CarRepository extends JpaRepository<CarEntity, Long> {
 
-    public List<CarEntity> findByBrand(String brand);
+    List<CarEntity> findByBrand(String brand);
 
-    public List<CarEntity> findByPriceBetween(double minPrice, double maxPrice);
+    List<CarEntity> findByPriceBetween(double minPrice, double maxPrice);
 
-    public List<CarEntity> findByStatus(String status);
+    List<CarEntity> findByStatus(String status);
 
 }
