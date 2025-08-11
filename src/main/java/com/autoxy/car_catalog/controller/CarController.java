@@ -1,14 +1,11 @@
 package com.autoxy.car_catalog.controller;
 
-import com.autoxy.car_catalog.dto.CarRequestDto;
-import com.autoxy.car_catalog.dto.CarResponseDto;
+import com.autoxy.car_catalog.dto.*;
 import com.autoxy.car_catalog.entity.CarEntity;
 import com.autoxy.car_catalog.mapper.CarMapper;
 import com.autoxy.car_catalog.service.CarService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.MediaType;
-import org.springframework.http.ResponseEntity;
+import org.springframework.http.*;
 import org.springframework.http.converter.HttpMessageNotReadableException;
 import org.springframework.web.bind.annotation.*;
 

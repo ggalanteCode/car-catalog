@@ -1,10 +1,7 @@
 package com.autoxy.car_catalog.service.impl;
 
 import com.autoxy.car_catalog.entity.CarEntity;
-import com.autoxy.car_catalog.exceptions.CarNotFoundException;
-import com.autoxy.car_catalog.exceptions.CarPriceRangeException;
-import com.autoxy.car_catalog.exceptions.CarStatusValueException;
-import com.autoxy.car_catalog.exceptions.NoCarExistsException;
+import com.autoxy.car_catalog.exceptions.*;
 import com.autoxy.car_catalog.mapper.CarMapper;
 import com.autoxy.car_catalog.repository.CarRepository;
 import com.autoxy.car_catalog.service.CarService;
@@ -14,8 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.time.format.DateTimeParseException;
-import java.util.List;
-import java.util.Optional;
+import java.util.*;
 
 @Service
 public class CarServiceImpl implements CarService {

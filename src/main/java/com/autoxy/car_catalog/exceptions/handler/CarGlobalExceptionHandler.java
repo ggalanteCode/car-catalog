@@ -1,18 +1,11 @@
 package com.autoxy.car_catalog.exceptions.handler;
 
 import com.autoxy.car_catalog.dto.CarErrorResponseDto;
-import com.autoxy.car_catalog.exceptions.CarNotFoundException;
-import com.autoxy.car_catalog.exceptions.CarPriceRangeException;
-import com.autoxy.car_catalog.exceptions.CarStatusValueException;
-import com.autoxy.car_catalog.exceptions.NoCarExistsException;
+import com.autoxy.car_catalog.exceptions.*;
 import org.hibernate.PropertyValueException;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
+import org.springframework.http.*;
 import org.springframework.http.converter.HttpMessageNotReadableException;
-import org.springframework.web.bind.annotation.ControllerAdvice;
-import org.springframework.web.bind.annotation.ExceptionHandler;
-import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.bind.annotation.ResponseStatus;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.resource.NoResourceFoundException;
 
 import java.time.format.DateTimeParseException;

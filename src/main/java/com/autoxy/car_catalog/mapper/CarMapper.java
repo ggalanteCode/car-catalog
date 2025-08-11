@@ -1,14 +1,12 @@
 package com.autoxy.car_catalog.mapper;
 
-import com.autoxy.car_catalog.dto.CarRequestDto;
-import com.autoxy.car_catalog.dto.CarResponseDto;
+import com.autoxy.car_catalog.dto.*;
 import com.autoxy.car_catalog.entity.CarEntity;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
 
 @Component
 public class CarMapper {
